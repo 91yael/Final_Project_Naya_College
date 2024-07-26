@@ -1,0 +1,12 @@
+[
+    {
+        "from": "Tel Aviv",
+        "to": "London",
+        "country": "United Kingdom"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Paris",
+        "country": "France"
+    }
+]
