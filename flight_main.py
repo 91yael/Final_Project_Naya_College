@@ -57,7 +57,7 @@ def main():
             
             # Convert the data to a DataFrame
             df = pd.DataFrame(all_flights)
-            parquet_filename = f'flights_data_{depart_date}_to_{return_date}_{to_country}.parquet'
+            parquet_filename = f'Flights_Data/flights_data_{depart_date}_to_{return_date}_{to_country}.parquet'
             
             # Upload to MinIO as Parquet
             bucket_name = os.getenv('MINIO_BUCKET_NAME')

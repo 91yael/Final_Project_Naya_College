@@ -54,17 +54,9 @@ def main():
     parquet_buffer = io.BytesIO()
     df.to_parquet(parquet_buffer, index=False)
 
-    # Connect to MinIO server
-    minio_client = Minio(
-        'localhost:9001',  # MinIO server URL adjusted for your port mapping
-        access_key=os.getenv("minio_access_key"),
-        secret_key=os.getenv("minio_secret_key"),
-        secure=False  # Set to True if using HTTPS
-    )
-
-    
     current_date = datetime.now().strftime('%Y-%m-%d')
-    parquet_filename = f'Parquet/weather_forecast_{current_date}.parquet'
+    parquet_filename = f'Weather_Data/weather_forecast_{current_date}.parquet'
+    
     bucket_name = os.getenv('MINIO_BUCKET_NAME')
     
 
