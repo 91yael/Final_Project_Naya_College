@@ -11,7 +11,7 @@ import pandas as pd
 def main():
     # Load environment variables from .env file
     load_dotenv()
-    api_key = os.getenv('Weather_api_key')
+    api_key = os.getenv('WEATHER_API_KEY')
     if not api_key:
         raise ValueError("API key not found. Make sure it's set in the .env file.")
 
@@ -61,7 +61,7 @@ def main():
         secure=False  # Set to True if using HTTPS
     )
 
-    bucket_name = 'project'
+    bucket_name = os.getenv('MINIO_BUCKET_NAME')
 
     # Get the current date
     current_date = datetime.now().strftime('%Y-%m-%d')
