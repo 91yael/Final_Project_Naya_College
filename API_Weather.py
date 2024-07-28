@@ -1,7 +1,9 @@
 import requests
+import os
 
 # Your API key
-api_key = '58dc65a39e0a47969faa150c8f380969'
+api_key = os.getenv("Weather_api_key")
+# '58dc65a39e0a47969faa150c8f380969'
 
 # Base URL for the Weatherbit API
 url = 'https://api.weatherbit.io/v2.0/forecast/daily'
@@ -17,7 +19,7 @@ for city in cities:
     params = {
         'key': api_key,
         'city': city,
-        'days': 7  # Number of days for the forecast
+        'days': 14  # Number of days for the forecast
     }
     
     # Make the GET request to the Weatherbit API
