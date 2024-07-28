@@ -7,6 +7,7 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 import pandas as pd
+from minio_utils import upload_parquet_to_minio
 
 def main():
     # Load environment variables from .env file
@@ -61,29 +62,12 @@ def main():
         secure=False  # Set to True if using HTTPS
     )
 
-    bucket_name = os.getenv('MINIO_BUCKET_NAME')
-
-    # Get the current date
+    
     current_date = datetime.now().strftime('%Y-%m-%d')
-    file_path = f'Parquet/weather_forecast_{current_date}.parquet'
+    parquet_filename = f'Parquet/weather_forecast_{current_date}.parquet'
+    bucket_name = os.getenv('MINIO_BUCKET_NAME')
+    
 
-    # Upload data to MinIO
-    try:
-        # Check if the bucket exists
-        if not minio_client.bucket_exists(bucket_name):
-            minio_client.make_bucket(bucket_name)
-        
-        # Upload the Parquet data as an object in the bucket
-        minio_client.put_object(
-            bucket_name=bucket_name,
-            object_name=file_path,
-            data=io.BytesIO(parquet_buffer.getvalue()),
-            length=parquet_buffer.getbuffer().nbytes,
-            content_type='application/octet-stream'
-        )
-        print(f"Weather data has been uploaded to {bucket_name}/{file_path} successfully.")
-    except S3Error as e:
-        print(f"Error occurred: {e}")
-
+    upload_parquet_to_minio(bucket_name, parquet_filename, df)
 if __name__ == "__main__":
     main()
