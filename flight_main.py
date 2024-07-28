@@ -3,10 +3,19 @@ import json
 import pandas as pd
 from dotenv import load_dotenv
 from flight_utils import get_location_id, get_flights, get_next_weekends, rapidapi_host, num_weekends_to_check
+from minio_utils import upload_parquet_to_minio
 
 def load_destinations(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
+
+def clean_flight_data(flight_data):
+    # Remove any entries with empty dictionaries or structs
+    cleaned_data = []
+    for flight in flight_data:
+        if isinstance(flight, dict) and all(isinstance(v, (str, int, float, list, dict)) for v in flight.values()):
+            cleaned_data.append({k: (v if v != {} else None) for k, v in flight.items()})
+    return cleaned_data
 
 def main():
     # Load environment variables from .env file
@@ -37,21 +46,25 @@ def main():
             to_id = get_location_id(to_city, headers)
             
             flights = get_flights(from_id, to_id, depart_date, return_date, headers)
+            cleaned_flights = clean_flight_data(flights)
             all_flights.append({
                 "from_city": from_city,
                 "to_city": to_city,
                 "depart_date": depart_date,
                 "return_date": return_date,
-                "flight_data": flights 
+                "flight_data": cleaned_flights
             })
             
-            # Save as Parquet file
+            # Convert the data to a DataFrame
             df = pd.DataFrame(all_flights)
             parquet_filename = f'flights_data_{depart_date}_to_{return_date}_{to_country}.parquet'
-            df.to_parquet(parquet_filename, index=False)
             
-            # Print confirmation
-            print(f"Flight data has been saved to '{parquet_filename}'.")
+            # Upload to MinIO as Parquet
+            bucket_name = os.getenv('MINIO_BUCKET_NAME')
+            
+            # Save as Parquet
+            upload_parquet_to_minio(bucket_name, parquet_filename, df)
 
 if __name__ == "__main__":
     main()
+
