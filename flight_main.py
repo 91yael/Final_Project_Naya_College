@@ -3,7 +3,7 @@ import json
 import pandas as pd
 from dotenv import load_dotenv
 from flight_utils import get_location_id, get_flights, get_next_weekends, rapidapi_host, num_weekends_to_check
-from minio_utils import upload_parquet_to_minio
+from minio_utils import MinioClient
 
 def load_destinations(file_path):
     with open(file_path, 'r') as file:
@@ -62,8 +62,11 @@ def main():
             # Upload to MinIO as Parquet
             bucket_name = os.getenv('MINIO_BUCKET_NAME')
             
-            # Save as Parquet
-            upload_parquet_to_minio(bucket_name, parquet_filename, df)
+            # Create an instance of MinioClient
+            minio_client = MinioClient()
+
+            # Upload the DataFrame as a Parquet file to MinIO
+            minio_client.upload_parquet_to_minio(bucket_name, parquet_filename, df)
 
 if __name__ == "__main__":
     main()

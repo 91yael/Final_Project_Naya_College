@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 import pandas as pd
-from minio_utils import upload_parquet_to_minio
+from minio_utils import MinioClient
 
 def main():
     # Load environment variables from .env file
@@ -60,6 +60,11 @@ def main():
     bucket_name = os.getenv('MINIO_BUCKET_NAME')
     
 
-    upload_parquet_to_minio(bucket_name, parquet_filename, df)
+    # Create an instance of MinioClient
+    minio_client = MinioClient()
+
+    # Upload the DataFrame as a Parquet file to MinIO
+    minio_client.upload_parquet_to_minio(bucket_name, parquet_filename, df)
+
 if __name__ == "__main__":
     main()
