@@ -76,9 +76,17 @@ class MinioClient:
             raise
         return df
 
-# Usage example:
-# minio_client = MinioClient()
-# minio_client.upload_json_to_minio(bucket_name, file_path, json_data)
-# minio_client.upload_parquet_to_minio(bucket_name, file_path, dataframe)
-# parquet_files = minio_client.list_parquet_files(bucket_name, prefix)
-# df = minio_client.read_parquet_file(bucket_name, object_name)
+    def get_latest_file(self, bucket_name, file_path):
+        try:
+            objects = self.client.list_objects(bucket_name, prefix=file_path, recursive=True)
+            latest_object = None
+            latest_time = None
+            for obj in objects:
+                if obj.object_name.endswith('.parquet'):
+                    if latest_time is None or obj.last_modified > latest_time:
+                        latest_time = obj.last_modified
+                        latest_object = obj.object_name
+            return latest_object
+        except S3Error as e:
+            print(f"MinIO S3Error: {e}")
+            raise

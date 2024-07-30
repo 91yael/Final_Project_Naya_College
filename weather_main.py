@@ -55,7 +55,7 @@ def main():
     df.to_parquet(parquet_buffer, index=False)
 
     current_date = datetime.now().strftime('%Y-%m-%d')
-    parquet_filename = f'Weather_Data/weather_forecast_{current_date}.parquet'
+    file_path = f'Weather_Data/weather_forecast_{current_date}.parquet'
     
     bucket_name = os.getenv('MINIO_BUCKET_NAME')
     
@@ -64,7 +64,7 @@ def main():
     minio_client = MinioClient()
 
     # Upload the DataFrame as a Parquet file to MinIO
-    minio_client.upload_parquet_to_minio(bucket_name, parquet_filename, df)
+    minio_client.upload_parquet_to_minio(bucket_name, file_path, df)
 
 if __name__ == "__main__":
     main()

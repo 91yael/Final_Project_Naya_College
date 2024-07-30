@@ -9,60 +9,47 @@ from minio_utils import MinioClient
 # Load environment variables from .env file
 load_dotenv()
 
-def extract_city_data(df, city_name, lat, lon, country_code, state_code, timezone):
-    city_data = {
-        "city_name": city_name,
-        "country_code": country_code,
-        "data": [],
-        "lat": lat,
-        "lon": lon,
-        "state_code": state_code,
-        "timezone": timezone
-    }
+def extract_city_weather_data(weather_data):
+    city_weather_info = {}
     
-    for _, row in df.iterrows():
-        data_entry = {
-            "app_max_temp": row.get("app_max_temp"),
-            "app_min_temp": row.get("app_min_temp"),
-            "clouds": row.get("clouds"),
-            "clouds_hi": row.get("clouds_hi"),
-            "clouds_low": row.get("clouds_low"),
-            "clouds_mid": row.get("clouds_mid"),
-            "datetime": row.get("datetime"),
-            "dewpt": row.get("dewpt"),
-            "high_temp": row.get("high_temp"),
-            "low_temp": row.get("low_temp"),
-            "max_dhi": row.get("max_dhi"),
-            "max_temp": row.get("max_temp"),
-            "min_temp": row.get("min_temp"),
-            "moon_phase": row.get("moon_phase"),
-            "moon_phase_lunation": row.get("moon_phase_lunation"),
-            "moonrise_ts": row.get("moonrise_ts"),
-            "moonset_ts": row.get("moonset_ts"),
-            "ozone": row.get("ozone"),
-            "pop": row.get("pop"),
-            "precip": row.get("precip"),
-            "pres": row.get("pres"),
-            "rh": row.get("rh"),
-            "slp": row.get("slp"),
-            "snow": row.get("snow"),
-            "snow_depth": row.get("snow_depth"),
-            "sunrise_ts": row.get("sunrise_ts"),
-            "sunset_ts": row.get("sunset_ts"),
-            "temp": row.get("temp"),
-            "ts": row.get("ts"),
-            "uv": row.get("uv"),
-            "valid_date": row.get("valid_date"),
-            "vis": row.get("vis"),
-            "wind_cdir": row.get("wind_cdir"),
-            "wind_cdir_full": row.get("wind_cdir_full"),
-            "wind_dir": row.get("wind_dir"),
-            "wind_gust_spd": row.get("wind_gust_spd"),
-            "wind_spd": row.get("wind_spd")
+    for city, details in weather_data.items():
+        city_info = {
+            "city_name": details["city_name"],
+            "country_code": details["country_code"],
+            "latitude": details["lat"],
+            "longitude": details["lon"],
+            "state_code": details["state_code"],
+            "timezone": details["timezone"],
+            "forecast": []
         }
-        city_data["data"].append(data_entry)
+        
+        for day in details["data"]:
+            day_info = {
+                "date": day["datetime"],
+                "temperature": {
+                    "high_temp": day["high_temp"],
+                    "low_temp": day["low_temp"],
+                    "average_temp": day["temp"]
+                },
+                "precipitation": day["precip"],
+                "humidity": day["rh"],
+                "wind": {
+                    "speed": day["wind_spd"],
+                    "direction": day["wind_cdir"],
+                    "gust_speed": day["wind_gust_spd"]
+                },
+                "weather": {
+                    "description": day["weather"]["description"],
+                    "icon": day["weather"]["icon"]
+                },
+                "uv_index": day["uv"],
+                "visibility": day["vis"]
+            }
+            city_info["forecast"].append(day_info)
+        
+        city_weather_info[city] = city_info
     
-    return city_data
+    return city_weather_info
 
 def send_to_kafka(topic, data, kafka_servers):
     producer = KafkaProducer(
@@ -74,9 +61,9 @@ def send_to_kafka(topic, data, kafka_servers):
     producer.close()
 
 if __name__ == "__main__":
-    bucket_name = 'final-project-naya-college'  # Replace with your bucket name
-    prefix = 'Weather_Data/'  # Directory prefix for the parquet files
-    kafka_servers = ['localhost:9092']  # Replace with your Kafka server addresses
+    bucket_name = os.getenv('MINIO_BUCKET_NAME') # Replace with your bucket name
+    file_path = 'Weather_Data/'  # Directory prefix for the parquet files
+    kafka_servers = [os.getenv('KAFKA_BROKER')]  # Replace with your Kafka server addresses
     kafka_topic = 'weather_data'  # Replace with your Kafka topic
 
     city_details = {
@@ -95,12 +82,33 @@ if __name__ == "__main__":
     minio_client = MinioClient()
 
     try:
-        parquet_files = minio_client.list_parquet_files(bucket_name, prefix)
-        for object_name in parquet_files:
-            print(f"Processing file: {object_name}")
-            df = minio_client.read_parquet_file(bucket_name, object_name)
+        # Get the latest parquet file
+        latest_file = minio_client.get_latest_file(bucket_name, file_path)
+        if latest_file:
+            print(f"Processing latest file: {latest_file}")
+            df = minio_client.read_parquet_file(bucket_name, latest_file)
+            
+            # Convert DataFrame to dictionary format expected by extract_city_weather_data
+            weather_data = {}
             for city, details in city_details.items():
-                city_data = extract_city_data(df, city, **details)
-                send_to_kafka(kafka_topic, city_data, kafka_servers)
+                city_df = df[df['city'] == city]
+                if not city_df.empty:
+                    city_data = {
+                        "city_name": city,
+                        "country_code": details["country_code"],
+                        "lat": details["lat"],
+                        "lon": details["lon"],
+                        "state_code": details["state_code"],
+                        "timezone": details["timezone"],
+                        "data": city_df.to_dict(orient='records')
+                    }
+                    weather_data[city] = city_data
+                else:
+                    print(f"No data found for city: {city}")
+            
+            city_weather_info = extract_city_weather_data(weather_data)
+            
+            for city, data in city_weather_info.items():
+                send_to_kafka(kafka_topic, data, kafka_servers)
     except Exception as e:
         print(f"Error: {e}")
