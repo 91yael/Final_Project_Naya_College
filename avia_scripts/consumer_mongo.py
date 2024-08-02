@@ -1,7 +1,7 @@
 from confluent_kafka import Consumer, KafkaException
 import json
 import os
-from mongo_utils import MongoClientWrapper
+from avia_scripts.mongo_utils import MongoClientWrapper
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
