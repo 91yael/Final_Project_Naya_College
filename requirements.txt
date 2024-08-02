@@ -9,3 +9,5 @@ python-dotenv
 pyarrow
 fastparquet
 minio
+psycopg2-binary
+apache-airflow

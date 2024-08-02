@@ -17,7 +17,7 @@ conf = {
 consumer = Consumer(conf)
 consumer.subscribe(['weather_data'])
 
-# Create an instance of MongoClientWrapper
+
 mongo_client = MongoClientWrapper()
 
 # Main Loop to Consume Messages and Insert into MongoDB

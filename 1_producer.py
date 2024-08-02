@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from kafka import KafkaProducer
 from minio_utils import MinioClient
 
-# Load environment variables from .env file
+
 load_dotenv()
 
 def extract_city_weather_data(weather_data):
@@ -61,10 +61,10 @@ def send_to_kafka(topic, data, kafka_servers):
     producer.close()
 
 if __name__ == "__main__":
-    bucket_name = os.getenv('MINIO_BUCKET_NAME') # Replace with your bucket name
-    file_path = 'Weather_Data/'  # Directory prefix for the parquet files
-    kafka_servers = [os.getenv('KAFKA_BROKER')]  # Replace with your Kafka server addresses
-    kafka_topic = 'weather_data'  # Replace with your Kafka topic
+    bucket_name = os.getenv('MINIO_BUCKET_NAME') 
+    file_path = 'Weather_Data/'  
+    kafka_servers = [os.getenv('KAFKA_BROKER')]  
+    kafka_topic = 'weather_data'
 
     city_details = {
         "Rome": {"lat": "41.89193", "lon": "12.51133", "country_code": "IT", "state_code": "07", "timezone": "Europe/Rome"},

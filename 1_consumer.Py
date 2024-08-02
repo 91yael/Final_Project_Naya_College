@@ -11,14 +11,14 @@ def process_weather_data(data):
         city_name = data['city_name']
         weather_info = data['data']
         
-        # Example processing function
+        
         print(f"Processing weather data for city: {city_name}")
         print("Data:", weather_info)
 
-        # Add any city-specific processing here
+        
         if city_name in ['Rome', 'Paris', 'London', 'New York', 'Athens', 'Barcelona', 'Madrid', 'Praha', 'Budapest']:
-            # Example: Different logic for each city (if needed)
-            pass  # Replace with actual processing logic
+            
+            pass 
 
     except KeyError as e:
         print(f"Missing key in data: {e}")
@@ -26,16 +26,16 @@ def process_weather_data(data):
         print(f"Error processing data: {e}")
 
 if __name__ == "__main__":
-    kafka_servers = ['localhost:9092']  # Replace with your Kafka server addresses
-    kafka_topic = 'weather_data'  # Topic name
+    kafka_servers = ['localhost:9092']  
+    kafka_topic = 'weather_data'  
 
     # Create a Kafka consumer
     consumer = KafkaConsumer(
         kafka_topic,
         bootstrap_servers=kafka_servers,
-        auto_offset_reset='earliest',  # Start reading at the earliest available message
+        auto_offset_reset='earliest',  
         enable_auto_commit=True,
-        group_id='weather_data_group',  # Consumer group ID
+        group_id='weather_data_group', 
         value_deserializer=lambda x: json.loads(x.decode('utf-8'))
     )
 
