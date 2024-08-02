@@ -52,7 +52,7 @@ def main():
     minio_access_key = os.getenv('MINIO_ACCESS_KEY')
     minio_secret_key = os.getenv('MINIO_SECRET_KEY')
     minio_bucket_name = os.getenv('MINIO_BUCKET_NAME')
-    minio_folder_path = os.getenv('MINIO_FOLDER_PATH')
+    minio_folder_path = os.getenv('MINIO_FOLDER_PATH_WEATHER')
     
     kafka_broker = os.getenv('KAFKA_BROKER')
     kafka_topic = os.getenv('KAFKA_TOPIC_WEATHER_2')
