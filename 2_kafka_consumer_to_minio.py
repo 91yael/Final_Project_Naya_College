@@ -25,7 +25,7 @@ def upload_to_minio(data, bucket_name):
     minio_client.upload_parquet_to_minio(bucket_name, file_path, df)
 
 def main():
-    # Load environment variables from .env file
+    
     load_dotenv()
 
     kafka_broker = os.getenv('KAFKA_BROKER')
@@ -48,9 +48,8 @@ def main():
     
     for message in consumer:
         weather_data.append(message.value)
-        
-        # Optional: you can add a condition to stop consuming after certain amount of data
-        if len(weather_data) >= 100:  # Example condition
+               
+        if len(weather_data) >= 200:  
             break
 
     upload_to_minio(weather_data, minio_bucket_name)

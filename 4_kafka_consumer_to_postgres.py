@@ -1,105 +1,88 @@
 import json
 import os
 import psycopg2
+import pyarrow.parquet as pq
+import pyarrow as pa
 from kafka import KafkaConsumer
 from dotenv import load_dotenv
+import io
 
-def extract_city_weather_data(weather_data):
-    city_weather_info = {}
-
-    for city, details in weather_data.items():
-        if isinstance(details, dict) and "city_name" in details:
-            city_info = {
-                "city_name": details.get("city_name", ""),
-                "country_code": details.get("country_code", ""),
-                "latitude": details.get("lat", 0),
-                "longitude": details.get("lon", 0),
-                "state_code": details.get("state_code", ""),
-                "timezone": details.get("timezone", ""),
-                "forecast": []
-            }
-
-            for day in details.get("data", []):
-                if isinstance(day, dict):
-                    day_info = {
-                        "date": day.get("datetime", ""),
-                        "temperature": {
-                            "high_temp": day.get("high_temp", 0),
-                            "low_temp": day.get("low_temp", 0),
-                            "average_temp": day.get("temp", 0)
-                        },
-                        "precipitation": day.get("precip", 0),
-                        "humidity": day.get("rh", 0),
-                        "wind": {
-                            "speed": day.get("wind_spd", 0),
-                            "direction": day.get("wind_cdir", ""),
-                            "gust_speed": day.get("wind_gust_spd", 0)
-                        },
-                        "weather": {
-                            "description": day.get("weather", {}).get("description", ""),
-                            "icon": day.get("weather", {}).get("icon", "")
-                        },
-                        "uv_index": day.get("uv", 0),
-                        "visibility": day.get("vis", 0)
-                    }
-                    city_info["forecast"].append(day_info)
-
-            city_weather_info[city] = city_info
-        else:
-            print(f"Unexpected data format for city {city}: {details}")
-
-    return city_weather_info
-
-def insert_data_to_postgres(conn, data):
+def extract_and_insert_data(conn, weather_data):
     try:
         cursor = conn.cursor()
 
-        insert_weather_query = """
-        INSERT INTO weather_data (city_name, country_code, latitude, longitude, state_code, timezone)
-        VALUES (%s, %s, %s, %s, %s, %s) RETURNING id
+        insert_query = """
+        INSERT INTO weather_forecast (
+            city_name, country_code, latitude, longitude, state_code, timezone,
+            date, high_temp, low_temp, average_temp, precipitation, humidity,
+            wind_speed, wind_direction, gust_speed, weather_description, weather_icon,
+            uv_index, visibility
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (city_name, date) DO UPDATE SET
+            high_temp = EXCLUDED.high_temp,
+            low_temp = EXCLUDED.low_temp,
+            average_temp = EXCLUDED.average_temp,
+            precipitation = EXCLUDED.precipitation,
+            humidity = EXCLUDED.humidity,
+            wind_speed = EXCLUDED.wind_speed,
+            wind_direction = EXCLUDED.wind_direction,
+            gust_speed = EXCLUDED.gust_speed,
+            weather_description = EXCLUDED.weather_description,
+            weather_icon = EXCLUDED.weather_icon,
+            uv_index = EXCLUDED.uv_index,
+            visibility = EXCLUDED.visibility
         """
 
-        insert_forecast_query = """
-        INSERT INTO forecast_data (weather_data_id, date, high_temp, low_temp, average_temp, precipitation, humidity, wind_speed, wind_direction, gust_speed, weather_description, weather_icon, uv_index, visibility)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
+        # print(f"Type of weather_data: {type(weather_data)}")
+        if isinstance(weather_data, dict):
+            print(f"Keys of weather_data: {list(weather_data.keys())}")
+            weather_data = [weather_data]  
 
-        for city, details in data.items():
-            cursor.execute(insert_weather_query, (
-                details['city_name'],
-                details['country_code'],
-                float(details['latitude'] or 0),  # Default to 0 if None
-                float(details['longitude'] or 0),  # Default to 0 if None
-                details['state_code'],
-                details['timezone']
-            ))
-            weather_data_id = cursor.fetchone()[0]
+        print(f"First few records: {weather_data[:5]}")  
 
-            for forecast in details['forecast']:
-                cursor.execute(insert_forecast_query, (
-                    weather_data_id,
-                    forecast['date'],
-                    float(forecast['temperature']['high_temp'] or 0),  # Default to 0 if None
-                    float(forecast['temperature']['low_temp'] or 0),  # Default to 0 if None
-                    float(forecast['temperature']['average_temp'] or 0),  # Default to 0 if None
-                    float(forecast['precipitation'] or 0),  # Default to 0 if None
-                    int(forecast['humidity'] or 0),  # Default to 0 if None
-                    float(forecast['wind']['speed'] or 0),  # Default to 0 if None
-                    forecast['wind']['direction'],
-                    float(forecast['wind']['gust_speed'] or 0),  # Default to 0 if None
-                    forecast['weather']['description'],
-                    forecast['weather']['icon'],
-                    int(forecast['uv_index'] or 0),  # Default to 0 if None
-                    float(forecast['visibility'] or 0)  # Default to 0 if None
-                ))
+        for record in weather_data:
+            if isinstance(record, dict):
+                city_name = record.get("city", "")
+                country_code = ""  
+                latitude = 0.0  
+                longitude = 0.0  
+                state_code = ""  
+                timezone = "" 
+
+                date = record.get("datetime", "")
+                high_temp = float(record.get("high_temp", 0))
+                low_temp = float(record.get("low_temp", 0))
+                average_temp = float(record.get("temp", 0))
+                precipitation = float(record.get("precip", 0))
+                humidity = int(record.get("rh", 0))
+                wind_speed = float(record.get("wind_spd", 0))
+                wind_direction = record.get("wind_cdir", "")
+                gust_speed = float(record.get("wind_gust_spd", 0))
+                weather_description = record.get("weather", {}).get("description", "")
+                weather_icon = record.get("weather", {}).get("icon", "")
+                uv_index = int(record.get("uv", 0))
+                visibility = float(record.get("vis", 0))
+
+                print(f"Inserting data for {city_name} on {date}")
+
+                try:
+                    cursor.execute(insert_query, (
+                        city_name, country_code, latitude, longitude, state_code, timezone,
+                        date, high_temp, low_temp, average_temp, precipitation, humidity,
+                        wind_speed, wind_direction, gust_speed, weather_description, weather_icon,
+                        uv_index, visibility
+                    ))
+                except Exception as e:
+                    print(f"Error executing insert for {city_name} on {date}: {e}")
 
         conn.commit()
         cursor.close()
     except Exception as err:
         print(f"An error occurred while inserting data into PostgreSQL: {err}")
+        conn.rollback()
 
 def main():
-    # Load environment variables from .env file
+
     load_dotenv()
 
     kafka_broker = os.getenv('KAFKA_BROKER')
@@ -119,9 +102,10 @@ def main():
         auto_offset_reset='earliest',
         enable_auto_commit=True,
         group_id='weather_data_group',
-        value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+        value_deserializer=lambda x: json.loads(x.decode('utf-8')),
+        consumer_timeout_ms=10000  
     )
-    
+
     conn = psycopg2.connect(
         host=postgres_host,
         port=postgres_port,
@@ -130,11 +114,36 @@ def main():
         password=postgres_password
     )
 
+    print("Starting to consume messages...")
+
     for message in consumer:
-        weather_data = message.value
-        city_weather_data = extract_city_weather_data(weather_data)
-        insert_data_to_postgres(conn, city_weather_data)
+        print("Received message")
+
+        try:
+            
+            message_data = message.value
+            print("Message is in JSON format")
+            print(f"Processing message with {len(message_data)} records")
+            extract_and_insert_data(conn, message_data)
+        except json.JSONDecodeError:
+            print("Message is not in JSON format, attempting to read as Parquet")
+            try:
+                parquet_buffer = io.BytesIO(message.value)
+                table = pq.read_table(parquet_buffer)
+                df = table.to_pandas()
+                
+                # Convert the dataframe to a list of dictionaries
+                weather_data = df.to_dict(orient='records')
+                
+                print(f"Processing message with {len(weather_data)} records")
+                extract_and_insert_data(conn, weather_data)
+            except Exception as e:
+                print(f"Error processing message as Parquet: {e}")
+                
+                with open('error_message.log', 'ab') as f:
+                    f.write(message.value)
     
+    print("Closing connection...")
     conn.close()
 
 if __name__ == "__main__":

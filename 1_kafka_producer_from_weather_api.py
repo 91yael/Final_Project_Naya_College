@@ -24,7 +24,7 @@ def get_weather_data(api_key, cities):
         # Make the GET request to the Weatherbit API
         try:
             response = requests.get(url, params=params)
-            response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+            response.raise_for_status() 
             data = response.json()
             for forecast in data['data']:
                 forecast['city'] = city
@@ -42,7 +42,7 @@ def send_to_kafka(producer, topic, data):
         producer.send(topic, json.dumps(record).encode('utf-8'))
 
 def main():
-    # Load environment variables from .env file
+    
     load_dotenv()
     api_key = os.getenv('WEATHER_API_KEY')
     if not api_key:

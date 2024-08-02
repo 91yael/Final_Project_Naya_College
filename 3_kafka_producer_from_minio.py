@@ -45,7 +45,7 @@ def send_to_kafka(producer, topic, data):
         producer.send(topic, json.dumps(record).encode('utf-8'))
 
 def main():
-    # Load environment variables from .env file
+    
     load_dotenv()
     
     minio_endpoint = os.getenv('MINIO_ENDPOINT')
@@ -63,12 +63,12 @@ def main():
     if not kafka_broker or not kafka_topic:
         raise ValueError("Kafka broker or topic not found. Make sure they are set in the .env file.")
     
-    # Use secure=False for HTTP connection
+ 
     minio_client = Minio(
         minio_endpoint,
         access_key=minio_access_key,
         secret_key=minio_secret_key,
-        secure=False  # Set to False if MinIO is running on HTTP
+        secure=False  
     )
     
     latest_file_path = get_latest_file_from_minio(minio_client, minio_bucket_name, minio_folder_path)
