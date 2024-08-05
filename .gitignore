@@ -5,3 +5,4 @@
 /airflow_data/plugins
 /airflow_data/dags/__pycache__/
 /__pycache__
+/myenv

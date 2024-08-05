@@ -1,3 +1,38 @@
+
+#%%
+from kafka import KafkaProducer
+import json
+
+def main():
+    # Create a KafkaProducer instance
+    producer = KafkaProducer(
+        bootstrap_servers='localhost:29092',  # Replace with your Kafka broker address
+        value_serializer=lambda v: json.dumps(v).encode('utf-8')  # Serialize message to JSON format
+    )
+    
+    # Define the topic and the message
+    topic = 'test-topic1'  # Replace with your Kafka topic
+    message = {'key': 'value', 'test': 'message121546844'}
+    
+    try:
+        # Send the message to the Kafka topic
+        producer.send(topic, value=message)
+        
+        # Ensure all messages are sent before closing the producer
+        producer.flush()
+        
+        print(f"Message sent to topic '{topic}': {message}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        # Close the producer
+        producer.close()
+
+if __name__ == "__main__":
+    main()
+
+
+#%%
 import os
 import json
 from dotenv import load_dotenv
@@ -19,6 +54,9 @@ def clean_flight_data(flight_data):
 
 def send_to_kafka(producer, topic, data):
     """Send data to Kafka topic."""
+    print(f"Sending {len(data)} records to Kafka topic '{topic}'...")
+    print(f"data: {data}")
+    # producer.send(topic, json.dumps(data[0]).encode('utf-8'))
     for record in data:
         producer.send(topic, json.dumps(record).encode('utf-8'))
 
@@ -61,7 +99,7 @@ def main():
 
     # Kafka producer setup
     producer = KafkaProducer(
-        bootstrap_servers=[kafka_broker],
+        bootstrap_servers='localhost:29092',
         retries=5,
         request_timeout_ms=30000,  # Increase request timeout
         batch_size=16384,  # Increase batch size
@@ -102,7 +140,8 @@ def main():
                         "return_date": return_date,
                         "price_raw": flight["price_raw"]
                     })
-
+                print(f"messages: {messages}")
+                print(f"producer: {producer}, kafka_topic: {kafka_topic}")
                 send_to_kafka(producer, kafka_topic, messages)
 
             except Exception as e:
