@@ -4,41 +4,26 @@ from dotenv import load_dotenv
 from kafka import KafkaProducer
 from flight_utils import FlightUtils
 
-# Load environment variables from .env file
-load_dotenv('.env')
-api_key = os.getenv('RAPIDAPI_KEY')
-kafka_broker = os.getenv('KAFKA_BROKER')
-kafka_topic = os.getenv('KAFKA_TOPIC_FLIGHTS_3')
+def load_destinations(file_path):
+    """Load destinations from a JSON file."""
+    with open(file_path, 'r') as file:
+        return json.load(file)
 
-if not api_key:
-    raise ValueError("API key not found. Make sure it's set in the .env file.")
-
-# Initialize FlightUtils
-flight_utils = FlightUtils()
-
-headers = {
-    "x-rapidapi-key": api_key,
-    "x-rapidapi-host": flight_utils.rapidapi_host
-}
+def clean_flight_data(flight_data):
+    """Clean flight data to remove empty entries."""
+    cleaned_data = []
+    for flight in flight_data:
+        if isinstance(flight, dict) and all(isinstance(v, (str, int, float, list, dict)) for v in flight.values()):
+            cleaned_data.append({k: (v if v != {} else None) for k, v in flight.items()})
+    return cleaned_data
 
 def send_to_kafka(producer, topic, data):
+    """Send data to Kafka topic."""
     for record in data:
-        summary = {
-            "from_city": record["from_city"],
-            "to_city": record["to_city"],
-            "depart_date": record["depart_date"],
-            "return_date": record["return_date"],
-            "price_raw": record["price_raw"]
-        }
-        print(f"Sending record to Kafka: {summary}") 
-        future = producer.send(topic, json.dumps(record).encode('utf-8'))
-        try:
-            future.get(timeout=30)  # Wait for the message to be acknowledged
-            print("Message sent successfully.")
-        except Exception as e:
-            print(f"Failed to send message to Kafka: {e}")
+        producer.send(topic, json.dumps(record).encode('utf-8'))
 
 def get_top_3_cheapest_flights(flights_data):
+    """Extract top 3 cheapest flights."""
     flights = []
     itineraries = flights_data.get("data", {}).get("itineraries", [])
 
@@ -57,20 +42,37 @@ def get_top_3_cheapest_flights(flights_data):
     return flights_sorted[:3]
 
 def main():
-    weekends = flight_utils.get_next_weekends()
-    destinations = flight_utils.load_destinations('destinations.json')
+    # Load environment variables from .env file
+    load_dotenv()
+    
+    api_key = os.getenv('RAPIDAPI_KEY')
+    kafka_broker = os.getenv('KAFKA_BROKER')
+    kafka_topic = os.getenv('KAFKA_TOPIC_FLIGHTS_3')
 
+    if not api_key or not kafka_broker or not kafka_topic:
+        raise ValueError("API key, Kafka broker, or topic not found. Make sure they are set in the .env file.")
+    
+    # Initialize FlightUtils
+    flight_utils = FlightUtils()
+    headers = {
+        "x-rapidapi-key": api_key,
+        "x-rapidapi-host": flight_utils.rapidapi_host
+    }
+
+    # Kafka producer setup
     producer = KafkaProducer(
-    bootstrap_servers=[kafka_broker],
-    retries=5,
-    request_timeout_ms=30000,  # Increase request timeout
-    batch_size=16384,  # Increase batch size
-    linger_ms=5000,  # Increase linger time
-    acks='all'  # Ensure message is acknowledged by all in-sync replicas
+        bootstrap_servers=[kafka_broker],
+        retries=5,
+        request_timeout_ms=30000,  # Increase request timeout
+        batch_size=16384,  # Increase batch size
+        linger_ms=5000,  # Increase linger time
+        acks='all'  # Ensure message is acknowledged by all in-sync replicas
     )
 
-    producer = KafkaProducer(bootstrap_servers=[kafka_broker], retries=5)
-    
+    # Load destinations
+    destinations = load_destinations('destinations.json')
+    weekends = flight_utils.get_next_weekends()
+
     for destination in destinations:
         from_city = destination.get("from")
         to_city = destination.get("to")
@@ -86,7 +88,7 @@ def main():
                 
                 print(f"Fetching flights from {from_id} to {to_id} for dates {depart_date} to {return_date}...")
                 flights_data = flight_utils.get_flights(from_id, to_id, depart_date, return_date, headers)
-
+                
                 # Get top 3 cheapest flights
                 top_3_flights = get_top_3_cheapest_flights(flights_data)
 
@@ -99,14 +101,15 @@ def main():
                         "depart_date": depart_date,
                         "return_date": return_date,
                         "price_raw": flight["price_raw"]
-                        #"itinerary": flight["itinerary"] 
                     })
-                
+
                 send_to_kafka(producer, kafka_topic, messages)
 
             except Exception as e:
                 print(f"Error processing flight data: {str(e)}")
 
+    # Ensure all messages are sent
+    producer.flush()
     producer.close()
 
 if __name__ == "__main__":

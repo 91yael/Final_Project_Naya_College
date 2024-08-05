@@ -1,0 +1,2378 @@
+[
+    {
+        "from_city": "Tel Aviv",
+        "to_city": "Paris",
+        "depart_date": "2024-08-01",
+        "return_date": "2024-08-03",
+        "flight_data": {
+            "status": true,
+            "message": "success",
+            "data": {
+                "token": "eyJhIjoiMSIsImMiOjAsImkiOjAsImNjIjoiZWNvbm9teSIsIm8iOiJUTFYiLCJkIjoiUEFSSSIsImQxIjoiMjAyNC0wOC0wMSIsImQyIjoiMjAyNC0wOC0wMyJ9",
+                "context": {
+                    "status": "incomplete",
+                    "sessionId": "ClQIARJQCk4KJGI2NjBkZjkwLThkZmUtNDAzYS1hNDE1LTYxYmFlZjBlMjMwYRACGiQzNjJkMGVjZC05MTg5LTQ5YzAtYTNjNC0zZmMzOGUyZTE0NjISKHVzc182MThjZDZmNy1iOGYwLTQwZjYtODA0ZS01OGJjM2FlNGUxNTI=",
+                    "totalResults": 10
+                },
+                "itineraries": [
+                    {
+                        "id": "16995-2408011835--31748-0-15083-2408012245|15083-2408031145--31748-0-16995-2408031725",
+                        "price": {
+                            "raw": 618.94,
+                            "formatted": "$619",
+                            "pricingOptionId": "fMIjhl14qgNo"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011835--31748-0-15083-2408012245",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "ORY",
+                                    "entityId": "95565040",
+                                    "name": "Paris Orly",
+                                    "displayCode": "ORY",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 310,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T18:35:00",
+                                "arrival": "2024-08-01T22:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -31748,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+                                            "name": "transavia"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -31747,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/T1.png",
+                                            "name": "Transavia France"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-15083-2408011835-2408012245--31748",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "ORY",
+                                            "displayCode": "ORY",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Orly",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T18:35:00",
+                                        "arrival": "2024-08-01T22:45:00",
+                                        "durationInMinutes": 310,
+                                        "flightNumber": "3459",
+                                        "marketingCarrier": {
+                                            "id": -31748,
+                                            "name": "transavia",
+                                            "alternateId": "HV",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -31747,
+                                            "name": "Transavia France",
+                                            "alternateId": "T1",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "15083-2408031145--31748-0-16995-2408031725",
+                                "origin": {
+                                    "id": "ORY",
+                                    "entityId": "95565040",
+                                    "name": "Paris Orly",
+                                    "displayCode": "ORY",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 280,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T11:45:00",
+                                "arrival": "2024-08-03T17:25:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -31748,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+                                            "name": "transavia"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -31747,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/T1.png",
+                                            "name": "Transavia France"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "15083-16995-2408031145-2408031725--31748",
+                                        "origin": {
+                                            "flightPlaceId": "ORY",
+                                            "displayCode": "ORY",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Orly",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T11:45:00",
+                                        "arrival": "2024-08-03T17:25:00",
+                                        "durationInMinutes": 280,
+                                        "flightNumber": "3458",
+                                        "marketingCarrier": {
+                                            "id": -31748,
+                                            "name": "transavia",
+                                            "alternateId": "HV",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -31747,
+                                            "name": "Transavia France",
+                                            "alternateId": "T1",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 11.640131
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "second_cheapest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.999
+                    },
+                    {
+                        "id": "16995-2408011630--32677-0-10413-2408012015|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 874.95,
+                            "formatted": "$875",
+                            "pricingOptionId": "naz4g9uVxl7X"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011630--32677-0-10413-2408012015",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 285,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T16:30:00",
+                                "arrival": "2024-08-01T20:15:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408011630-2408012015--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T16:30:00",
+                                        "arrival": "2024-08-01T20:15:00",
+                                        "durationInMinutes": 285,
+                                        "flightNumber": "963",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 27.821815
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "shortest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.792568
+                    },
+                    {
+                        "id": "16995-2408011000--32677-0-10413-2408011350|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 983.95,
+                            "formatted": "$984",
+                            "pricingOptionId": "JkftQeacXkiD"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011000--32677-0-10413-2408011350",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 290,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T10:00:00",
+                                "arrival": "2024-08-01T13:50:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -32352,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LY.png",
+                                            "name": "EL AL Israel Airlines"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408011000-2408011350--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T10:00:00",
+                                        "arrival": "2024-08-01T13:50:00",
+                                        "durationInMinutes": 290,
+                                        "flightNumber": "7069",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32352,
+                                            "name": "EL AL Israel Airlines",
+                                            "alternateId": "LY",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 15.199905
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "second_shortest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.736316
+                    },
+                    {
+                        "id": "16995-2408011655--32677-0-10413-2408012045|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 1034.95,
+                            "formatted": "$1,035",
+                            "pricingOptionId": "yOBodpyHLslc"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011655--32677-0-10413-2408012045",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 290,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T16:55:00",
+                                "arrival": "2024-08-01T20:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -32352,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LY.png",
+                                            "name": "EL AL Israel Airlines"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408011655-2408012045--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T16:55:00",
+                                        "arrival": "2024-08-01T20:45:00",
+                                        "durationInMinutes": 290,
+                                        "flightNumber": "7071",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32352,
+                                            "name": "EL AL Israel Airlines",
+                                            "alternateId": "LY",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 6.4020634
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "third_shortest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.665548
+                    },
+                    {
+                        "id": "16995-2408010800--32677-0-10413-2408011200|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 1092.95,
+                            "formatted": "$1,093",
+                            "pricingOptionId": "mkp7rQsHObbm"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408010800--32677-0-10413-2408011200",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 300,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T08:00:00",
+                                "arrival": "2024-08-01T12:00:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -32352,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LY.png",
+                                            "name": "EL AL Israel Airlines"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408010800-2408011200--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T08:00:00",
+                                        "arrival": "2024-08-01T12:00:00",
+                                        "durationInMinutes": 300,
+                                        "flightNumber": "6176",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32352,
+                                            "name": "EL AL Israel Airlines",
+                                            "alternateId": "LY",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 21.291763
+                        },
+                        "fareAttributes": {},
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.659962
+                    },
+                    {
+                        "id": "16995-2408010550--32677-0-10413-2408010950|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 1092.95,
+                            "formatted": "$1,093",
+                            "pricingOptionId": "IgFRzlyu1gKy"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408010550--32677-0-10413-2408010950",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 300,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T05:50:00",
+                                "arrival": "2024-08-01T09:50:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -32352,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LY.png",
+                                            "name": "EL AL Israel Airlines"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408010550-2408010950--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T05:50:00",
+                                        "arrival": "2024-08-01T09:50:00",
+                                        "durationInMinutes": 300,
+                                        "flightNumber": "7067",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32352,
+                                            "name": "EL AL Israel Airlines",
+                                            "alternateId": "LY",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 14.980632
+                        },
+                        "fareAttributes": {},
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.640688
+                    },
+                    {
+                        "id": "16995-2408011330--32677-0-10413-2408011730|10413-2408030930--32677-0-16995-2408031445",
+                        "price": {
+                            "raw": 1092.95,
+                            "formatted": "$1,093",
+                            "pricingOptionId": "k_JReM1XbBAh"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011330--32677-0-10413-2408011730",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 300,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T13:30:00",
+                                "arrival": "2024-08-01T17:30:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -32352,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LY.png",
+                                            "name": "EL AL Israel Airlines"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-10413-2408011330-2408011730--32677",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T13:30:00",
+                                        "arrival": "2024-08-01T17:30:00",
+                                        "durationInMinutes": 300,
+                                        "flightNumber": "7073",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32352,
+                                            "name": "EL AL Israel Airlines",
+                                            "alternateId": "LY",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030930--32677-0-16995-2408031445",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 255,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T09:30:00",
+                                "arrival": "2024-08-03T14:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32677,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                                            "name": "Air France"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-16995-2408030930-2408031445--32677",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T09:30:00",
+                                        "arrival": "2024-08-03T14:45:00",
+                                        "durationInMinutes": 255,
+                                        "flightNumber": "958",
+                                        "marketingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32677,
+                                            "name": "Air France",
+                                            "alternateId": "AF",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 14.980632
+                        },
+                        "fareAttributes": {},
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.638039
+                    },
+                    {
+                        "id": "16995-2408011835--31748-0-15083-2408012245|10413-2408032140--32356,-30596-1-16995-2408041055",
+                        "price": {
+                            "raw": 459.78,
+                            "formatted": "$460",
+                            "pricingOptionId": "slPXrS1nFxtG"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011835--31748-0-15083-2408012245",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "ORY",
+                                    "entityId": "95565040",
+                                    "name": "Paris Orly",
+                                    "displayCode": "ORY",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": true
+                                },
+                                "durationInMinutes": 310,
+                                "stopCount": 0,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T18:35:00",
+                                "arrival": "2024-08-01T22:45:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -31748,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+                                            "name": "transavia"
+                                        }
+                                    ],
+                                    "operating": [
+                                        {
+                                            "id": -31747,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/T1.png",
+                                            "name": "Transavia France"
+                                        }
+                                    ],
+                                    "operationType": "not_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-15083-2408011835-2408012245--31748",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "ORY",
+                                            "displayCode": "ORY",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Orly",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T18:35:00",
+                                        "arrival": "2024-08-01T22:45:00",
+                                        "durationInMinutes": 310,
+                                        "flightNumber": "3459",
+                                        "marketingCarrier": {
+                                            "id": -31748,
+                                            "name": "transavia",
+                                            "alternateId": "HV",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -31747,
+                                            "name": "Transavia France",
+                                            "alternateId": "T1",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408032140--32356,-30596-1-16995-2408041055",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": true
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 735,
+                                "stopCount": 1,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T21:40:00",
+                                "arrival": "2024-08-04T10:55:00",
+                                "timeDeltaInDays": 1,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32356,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/EZ.png",
+                                            "name": "easyJet"
+                                        },
+                                        {
+                                            "id": -30596,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/I*.png",
+                                            "name": "Wizz Air Malta"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-14476-2408032140-2408032310--32356",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "MXP",
+                                            "displayCode": "MXP",
+                                            "parent": {
+                                                "flightPlaceId": "MILA",
+                                                "displayCode": "MIL",
+                                                "name": "Milan",
+                                                "type": "City"
+                                            },
+                                            "name": "Milan Malpensa",
+                                            "type": "Airport",
+                                            "country": "Italy"
+                                        },
+                                        "departure": "2024-08-03T21:40:00",
+                                        "arrival": "2024-08-03T23:10:00",
+                                        "durationInMinutes": 90,
+                                        "flightNumber": "3814",
+                                        "marketingCarrier": {
+                                            "id": -32356,
+                                            "name": "easyJet",
+                                            "alternateId": "EZ",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32356,
+                                            "name": "easyJet",
+                                            "alternateId": "EZ",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    },
+                                    {
+                                        "id": "14476-16995-2408040600-2408041055--30596",
+                                        "origin": {
+                                            "flightPlaceId": "MXP",
+                                            "displayCode": "MXP",
+                                            "parent": {
+                                                "flightPlaceId": "MILA",
+                                                "displayCode": "MIL",
+                                                "name": "Milan",
+                                                "type": "City"
+                                            },
+                                            "name": "Milan Malpensa",
+                                            "type": "Airport",
+                                            "country": "Italy"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-04T06:00:00",
+                                        "arrival": "2024-08-04T10:55:00",
+                                        "durationInMinutes": 235,
+                                        "flightNumber": "6403",
+                                        "marketingCarrier": {
+                                            "id": -30596,
+                                            "name": "Wizz Air Malta",
+                                            "alternateId": "I*",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -30596,
+                                            "name": "Wizz Air Malta",
+                                            "alternateId": "I*",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": true,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "eco": {
+                            "ecoContenderDelta": 12.234152
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "cheapest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.555133
+                    },
+                    {
+                        "id": "16995-2408011630--32090-1-10413-2408012255|10413-2408030730--32090-1-16995-2408031525",
+                        "price": {
+                            "raw": 714.21,
+                            "formatted": "$715",
+                            "pricingOptionId": "PnHae23F1P8k"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011630--32090-1-10413-2408012255",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 445,
+                                "stopCount": 1,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T16:30:00",
+                                "arrival": "2024-08-01T22:55:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32090,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+                                            "name": "Lufthansa"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-11616-2408011630-2408012005--32090",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "departure": "2024-08-01T16:30:00",
+                                        "arrival": "2024-08-01T20:05:00",
+                                        "durationInMinutes": 275,
+                                        "flightNumber": "687",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    },
+                                    {
+                                        "id": "11616-10413-2408012140-2408012255--32090",
+                                        "origin": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T21:40:00",
+                                        "arrival": "2024-08-01T22:55:00",
+                                        "durationInMinutes": 75,
+                                        "flightNumber": "1052",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030730--32090-1-16995-2408031525",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 415,
+                                "stopCount": 1,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T07:30:00",
+                                "arrival": "2024-08-03T15:25:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32090,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+                                            "name": "Lufthansa"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-11616-2408030730-2408030845--32090",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "departure": "2024-08-03T07:30:00",
+                                        "arrival": "2024-08-03T08:45:00",
+                                        "durationInMinutes": 75,
+                                        "flightNumber": "1051",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    },
+                                    {
+                                        "id": "11616-16995-2408031015-2408031525--32090",
+                                        "origin": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T10:15:00",
+                                        "arrival": "2024-08-03T15:25:00",
+                                        "durationInMinutes": 250,
+                                        "flightNumber": "686",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "fareAttributes": {},
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.520914
+                    },
+                    {
+                        "id": "16995-2408011630--32090-1-10413-2408012255|10413-2408030605--32090-1-16995-2408031525",
+                        "price": {
+                            "raw": 674.62,
+                            "formatted": "$675",
+                            "pricingOptionId": "WUbXKQ89iglv"
+                        },
+                        "legs": [
+                            {
+                                "id": "16995-2408011630--32090-1-10413-2408012255",
+                                "origin": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 445,
+                                "stopCount": 1,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-01T16:30:00",
+                                "arrival": "2024-08-01T22:55:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32090,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+                                            "name": "Lufthansa"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "16995-11616-2408011630-2408012005--32090",
+                                        "origin": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "departure": "2024-08-01T16:30:00",
+                                        "arrival": "2024-08-01T20:05:00",
+                                        "durationInMinutes": 275,
+                                        "flightNumber": "687",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    },
+                                    {
+                                        "id": "11616-10413-2408012140-2408012255--32090",
+                                        "origin": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "departure": "2024-08-01T21:40:00",
+                                        "arrival": "2024-08-01T22:55:00",
+                                        "durationInMinutes": 75,
+                                        "flightNumber": "1052",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "10413-2408030605--32090-1-16995-2408031525",
+                                "origin": {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle",
+                                    "displayCode": "CDG",
+                                    "city": "Paris",
+                                    "country": "France",
+                                    "isHighlighted": false
+                                },
+                                "destination": {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl",
+                                    "displayCode": "TLV",
+                                    "city": "Tel Aviv",
+                                    "country": "Israel",
+                                    "isHighlighted": false
+                                },
+                                "durationInMinutes": 500,
+                                "stopCount": 1,
+                                "isSmallestStops": false,
+                                "departure": "2024-08-03T06:05:00",
+                                "arrival": "2024-08-03T15:25:00",
+                                "timeDeltaInDays": 0,
+                                "carriers": {
+                                    "marketing": [
+                                        {
+                                            "id": -32090,
+                                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+                                            "name": "Lufthansa"
+                                        }
+                                    ],
+                                    "operationType": "fully_operated"
+                                },
+                                "segments": [
+                                    {
+                                        "id": "10413-11616-2408030605-2408030720--32090",
+                                        "origin": {
+                                            "flightPlaceId": "CDG",
+                                            "displayCode": "CDG",
+                                            "parent": {
+                                                "flightPlaceId": "PARI",
+                                                "displayCode": "PAR",
+                                                "name": "Paris",
+                                                "type": "City"
+                                            },
+                                            "name": "Paris Charles de Gaulle",
+                                            "type": "Airport",
+                                            "country": "France"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "departure": "2024-08-03T06:05:00",
+                                        "arrival": "2024-08-03T07:20:00",
+                                        "durationInMinutes": 75,
+                                        "flightNumber": "1053",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    },
+                                    {
+                                        "id": "11616-16995-2408031015-2408031525--32090",
+                                        "origin": {
+                                            "flightPlaceId": "FRA",
+                                            "displayCode": "FRA",
+                                            "parent": {
+                                                "flightPlaceId": "FRAN",
+                                                "displayCode": "FRA",
+                                                "name": "Frankfurt",
+                                                "type": "City"
+                                            },
+                                            "name": "Frankfurt am Main",
+                                            "type": "Airport",
+                                            "country": "Germany"
+                                        },
+                                        "destination": {
+                                            "flightPlaceId": "TLV",
+                                            "displayCode": "TLV",
+                                            "parent": {
+                                                "flightPlaceId": "TELA",
+                                                "displayCode": "TLV",
+                                                "name": "Tel Aviv",
+                                                "type": "City"
+                                            },
+                                            "name": "Ben Gurion Intl",
+                                            "type": "Airport",
+                                            "country": "Israel"
+                                        },
+                                        "departure": "2024-08-03T10:15:00",
+                                        "arrival": "2024-08-03T15:25:00",
+                                        "durationInMinutes": 250,
+                                        "flightNumber": "686",
+                                        "marketingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        },
+                                        "operatingCarrier": {
+                                            "id": -32090,
+                                            "name": "Lufthansa",
+                                            "alternateId": "LH",
+                                            "allianceId": 0,
+                                            "displayCode": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "isSelfTransfer": false,
+                        "isProtectedSelfTransfer": false,
+                        "farePolicy": {
+                            "isChangeAllowed": false,
+                            "isPartiallyChangeable": false,
+                            "isCancellationAllowed": false,
+                            "isPartiallyRefundable": false
+                        },
+                        "fareAttributes": {},
+                        "tags": [
+                            "third_cheapest"
+                        ],
+                        "isMashUp": false,
+                        "hasFlexibleOptions": false,
+                        "score": 0.514811
+                    }
+                ],
+                "messages": [],
+                "filterStats": {
+                    "duration": {
+                        "min": 285,
+                        "max": 735,
+                        "multiCityMin": 540,
+                        "multiCityMax": 1045
+                    },
+                    "airports": [
+                        {
+                            "city": "Paris",
+                            "airports": [
+                                {
+                                    "id": "CDG",
+                                    "entityId": "95565041",
+                                    "name": "Paris Charles de Gaulle"
+                                },
+                                {
+                                    "id": "ORY",
+                                    "entityId": "95565040",
+                                    "name": "Paris Orly"
+                                }
+                            ]
+                        },
+                        {
+                            "city": "Tel Aviv",
+                            "airports": [
+                                {
+                                    "id": "TLV",
+                                    "entityId": "95673635",
+                                    "name": "Ben Gurion Intl"
+                                }
+                            ]
+                        }
+                    ],
+                    "carriers": [
+                        {
+                            "id": -32677,
+                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AF.png",
+                            "name": "Air France"
+                        },
+                        {
+                            "id": -32356,
+                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/EZ.png",
+                            "name": "easyJet"
+                        },
+                        {
+                            "id": -32090,
+                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/LH.png",
+                            "name": "Lufthansa"
+                        },
+                        {
+                            "id": -31748,
+                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/HV.png",
+                            "name": "transavia"
+                        },
+                        {
+                            "id": -30596,
+                            "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/I*.png",
+                            "name": "Wizz Air Malta"
+                        }
+                    ],
+                    "stopPrices": {
+                        "direct": {
+                            "isPresent": true,
+                            "formattedPrice": "$619"
+                        },
+                        "one": {
+                            "isPresent": true,
+                            "formattedPrice": "$460"
+                        },
+                        "twoOrMore": {
+                            "isPresent": false
+                        }
+                    }
+                },
+                "flightsSessionId": "b660df90-8dfe-403a-a415-61baef0e230a",
+                "destinationImageUrl": "https://content.skyscnr.com/m/3719e8f4a5daf43d/original/Flights-Placeholder.jpg"
+            }
+        }
+    }
+]
