@@ -232,81 +232,41 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  # minio:
-  #   image: minio/minio:RELEASE.2022-11-08T05-27-07Z
-  #   command: server /data --console-address ":9001"
-  #   ports:
-  #     - "9001:9000"
-  #     - "9002:9001"
+  minio:
+    image: minio/minio:RELEASE.2022-11-08T05-27-07Z
+    command: server /data --console-address ":9001"
+    ports:
+      - "9001:9000"
+      - "9002:9001"
 
-  # zookeeper:
-  #   image: wurstmeister/zookeeper:3.4.6
-  #   ports:
-  #     - "2181:2181"
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - "2181:2181"
 
-  # course-kafka:
-  #   image: wurstmeister/kafka:2.13-2.8.1
-  #   environment:
-  #     KAFKA_ADVERTISED_HOST_NAME: course-kafka
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  #   ports:
-  #     - "9092:9092"
-  #   depends_on:
-  #     - zookeeper
+  course-kafka:
+    image: wurstmeister/kafka:2.13-2.8.1
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: course-kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
 
-  # kafdrop:
-  #   image: obsidiandynamics/kafdrop:3.30.0
-  #   ports:
-  #     - "9003:9000"
-  #   environment:
-  #     - KAFKA_BROKERCONNECT=course-kafka:9092
-  #   depends_on:
-  #     - course-kafka
+  kafdrop:
+    image: obsidiandynamics/kafdrop:3.30.0
+    ports:
+      - "9003:9000"
+    environment:
+      - KAFKA_BROKERCONNECT=course-kafka:9092
+    depends_on:
+      - course-kafka
       
-  # mariadb:
-  #   image: mariadb:10.1.11
-  #   ports:
-  #     - 3306:3306
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: admin
-  #     MYSQL_USER: admin
-  #     MYSQL_PASSWORD: admin
-  #     MYSQL_DATABASE: metastore_db
-  
-  # hive-metastore:
-  #   image: ofrir119/hive-metastore:1.0
-  #   ports:
-  #     - 9083:9083
-  #   depends_on:
-  #     - mariadb
-    
-  # dev_env:
-  #   image: ofrir119/developer_env:spark340_ssh
-  #   ports:
-  #     - "22022:22"
-  #     - "8888:8888"
-  #     - "4040:4040"
-  #     - "4041:4041"
-  #     - "4042:4042"
-
   # mongo:
   #   image: mongo:6.0.13
   #   ports:
   #     - "27017:27017"
       
-  # elasticsearch:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2
-  #   ports:
-  #     - "9200:9200"
-  #   environment:
-  #     discovery.type: single-node
-      
-  # kibana:
-  #   image: docker.elastic.co/kibana/kibana:7.13.2
-  #   ports:
-  #     - "5601:5601"
-  #   depends_on:
-  #     - elasticsearch
-
 volumes:
   postgres-db-volume:
