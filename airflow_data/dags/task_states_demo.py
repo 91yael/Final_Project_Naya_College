@@ -16,7 +16,8 @@ dag = DAG(
     'task_states_demo',
     default_args=default_args,
     description='Demonstration of task states using Bash Operator',
-    schedule_interval=timedelta(days=1)
+    schedule_interval=timedelta(days=1),
+    catchup=False
 )
 
 # Task 1: Successful task
