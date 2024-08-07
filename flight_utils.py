@@ -41,32 +41,35 @@ class FlightUtils:
             raise ValueError(f"Error: {response.status_code}, {response.text}")
         return response.json()
     
-    #Clean flight data to remove empty entries
+    # Clean flight data to remove empty entries and filter by stop count
     def clean_flight_data(self, flight_data):
         cleaned_data = []
-        for flight in flight_data:
-            if isinstance(flight, dict) and all(isinstance(v, (str, int, float, list, dict)) for v in flight.values()):
-                cleaned_data.append({k: (v if v != {} else None) for k, v in flight.items()})
+        for flight in flight_data.get("data", {}).get("itineraries", []):
+            if isinstance(flight, dict):
+                stop_count = flight.get("stopCount", 0)
+                if stop_count == 0:
+                    cleaned_data.append({k: (v if v != {} else None) for k, v in flight.items()})
         return cleaned_data
     
-    #Extract top cheapest flights
+    # Extract top cheapest flights
     def get_top_cheapest_flights(self, flights_data, top_cheapest_flights):
         flights = []
         itineraries = flights_data.get("data", {}).get("itineraries", [])
     
         for itinerary in itineraries:
             price_raw = itinerary.get("price", {}).get("raw", float('inf'))
-            flights.append({
-                "id": itinerary.get("id"),
-                "price_raw": price_raw,
-                "itinerary": itinerary
-            })
+            stop_count = itinerary.get("stopCount", 0) 
+            if stop_count == 0:  
+                flights.append({
+                    "id": itinerary.get("id"),
+                    "price_raw": price_raw,
+                    "itinerary": itinerary
+                })
     
         # Sort flights by price
         flights_sorted = sorted(flights, key=lambda x: x["price_raw"])
         return flights_sorted[:top_cheapest_flights]
 
-    
     # Get next weekends
     def get_next_weekends(self, num_weekends=None):
         if num_weekends is None:
@@ -82,7 +85,7 @@ class FlightUtils:
     # Get next workdays
     def get_next_workdays(self, num_weeks=None):
         if num_weeks is None:
-            num_weeks = self.num_workdays_to_check
+            num_weeks = self.num_weeks_to_check
         today = datetime.now()
         workdays = []
         for i in range(num_weeks):
@@ -96,4 +99,3 @@ class FlightUtils:
     def load_destinations(self, file_path):
         with open(file_path, 'r') as file:
             return json.load(file)
-
