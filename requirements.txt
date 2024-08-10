@@ -11,3 +11,6 @@ fastparquet
 minio
 psycopg2-binary
 apache-airflow
+kafka-python
+
+
