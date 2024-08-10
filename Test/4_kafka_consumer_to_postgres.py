@@ -7,6 +7,42 @@ from kafka import KafkaConsumer
 from dotenv import load_dotenv
 import io
 
+def create_table_if_not_exists(conn):
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS public.weather_forecast
+    (
+        id serial PRIMARY KEY,
+        city_name varchar(100),
+        country_code varchar(10),
+        latitude double precision,
+        longitude double precision,
+        state_code varchar(10),
+        timezone varchar(50),
+        date date,
+        high_temp double precision,
+        low_temp double precision,
+        average_temp double precision,
+        precipitation double precision,
+        humidity integer,
+        wind_speed double precision,
+        wind_direction varchar(10),
+        gust_speed double precision,
+        weather_description varchar(255),
+        weather_icon varchar(10),
+        uv_index integer,
+        visibility double precision,
+        CONSTRAINT weather_forecast_unique UNIQUE (city_name, date)
+    )
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute(create_table_query)
+        conn.commit()
+        cursor.close()
+    except Exception as e:
+        print(f"Error creating table: {e}")
+        conn.rollback()
+
 def extract_and_insert_data(conn, weather_data):
     try:
         cursor = conn.cursor()
@@ -113,6 +149,8 @@ def main():
         user=postgres_user,
         password=postgres_password
     )
+
+    create_table_if_not_exists(conn)
 
     print("Starting to consume messages...")
 

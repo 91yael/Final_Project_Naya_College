@@ -1,16 +1,18 @@
 #python -m venv myenv
 #source myenv/Scripts/activate
 # pip install -r ./requirements.txt
-requests
-pandas
-sqlalchemy
-datetime
-python-dotenv
-pyarrow
-fastparquet
-minio
-psycopg2-binary
-apache-airflow
-kafka-python
+requests==2.31.0
+pandas==2.0.3
+sqlalchemy==1.4.47
+datetime==5.1
+python-dotenv==1.0.0
+pyarrow==12.0.1
+fastparquet==2024.2.0
+minio==7.1.8
+psycopg2-binary==2.9.8
+apache-airflow==2.8.2
+kafka-python==2.0.1
+confluent_kafka==2.4.0
+numpy==1.25.0
 
 
