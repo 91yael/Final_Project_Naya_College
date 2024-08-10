@@ -2,25 +2,10 @@ import os
 import json
 from dotenv import load_dotenv
 from kafka import KafkaProducer
-from Test.flight_utils import FlightUtils
-
-"""Initialize parameters"""
-
-#The number of top cheapest flights to retrieve.
-num_cheapest_flights=3
-
-#The number of weekends to retrieve.
-next_weekends=2
-
-#The path of destinations file.
-destination_path = 'destinations.json'
-
-""""""
+from flight_utils import FlightUtils
 
 #Send data to Kafka topic
 def send_to_kafka(producer, topic, data):
-    print(f"Sending {len(data)} records to Kafka topic '{topic}'...")
-    print(f"data: {data}")
     for record in data:
         producer.send(topic, json.dumps(record).encode('utf-8'))
 
@@ -54,9 +39,9 @@ def main():
     )
 
     # Load destinations
-    destinations = flight_utils.load_destinations(destination_path)
+    destinations = flight_utils.load_destinations(flight_utils.destinations_path)
     # Get next weekends
-    weekends = flight_utils.get_next_weekends(next_weekends)
+    weekends = flight_utils.get_next_weekends(flight_utils.num_weekends_to_check)
 
     for destination in destinations:
         from_city = destination.get("from")
@@ -71,26 +56,59 @@ def main():
                 from_id = flight_utils.get_location_id(from_city, headers)
                 to_id = flight_utils.get_location_id(to_city, headers)
                 
-                print(f"Fetching flights from {from_id} to {to_id} for dates {depart_date} to {return_date}...")
                 flights_data = flight_utils.get_flights(from_id, to_id, depart_date, return_date, headers)
                 
+                # Clean flight data to include only direct flights
+                clean_data, all_itineraries = flight_utils.clean_flight_data(flights_data)
+                
+                # Extract necessary flight details
+                detailed_flights = flight_utils.extract_flight_details(clean_data)
+                
                 # Get top cheapest flights
-                top_cheapest_flights = flight_utils.get_top_cheapest_flights(flights_data,num_cheapest_flights)
-
-                # Prepare messages
-                messages = []
+                top_cheapest_flights = flight_utils.get_top_cheapest_flights(detailed_flights, flight_utils.num_cheapest_flights)
+                # Prepare flight_messages
+                flight_messages = []
                 for flight in top_cheapest_flights:
-                    messages.append({
+                    flight_messages.append({
+                        "roundtrip_id": flight["id"],
+                        "from_country": flight["outbound_leg"]["origin_airport"],
+                        "to_country": flight["outbound_leg"]["destination_airport"],
                         "from_city": from_city,
                         "to_city": to_city,
                         "depart_date": depart_date,
                         "return_date": return_date,
-                        "price_raw": flight["price_raw"],
-                        "itinerary": flight["itinerary"] 
+                        "price_dollar": flight["price_dollar"],
+                        "outbound_leg": {
+                            "id": flight["outbound_leg"]["id"],
+                            "departure_time": flight["outbound_leg"]["departure_time"],
+                            "arrival_time": flight["outbound_leg"]["arrival_time"],
+                            "origin_airport": flight["outbound_leg"]["origin_airport"],
+                            "destination_airport": flight["outbound_leg"]["destination_airport"],
+                            "flight_number": flight["outbound_leg"]["flight_number"],
+                            "airline": flight["outbound_leg"].get("airline")
+                        },
+                        "return_leg": {
+                            "id": flight["return_leg"]["id"],
+                            "departure_time": flight["return_leg"]["departure_time"],
+                            "arrival_time": flight["return_leg"]["arrival_time"],
+                            "origin_airport": flight["return_leg"]["origin_airport"],
+                            "destination_airport": flight["return_leg"]["destination_airport"],
+                            "flight_number": flight["return_leg"]["flight_number"],
+                            "airline": flight["return_leg"].get("airline")
+                        }
                     })
-                print(f"messages: {messages}")
-                print(f"producer: {producer}, kafka_topic: {kafka_topic}")
-                send_to_kafka(producer, kafka_topic, messages)
+                
+                # Send flight messages
+                send_to_kafka(producer, kafka_topic, flight_messages)
+                
+                # Prepare and send itineraries message with prefix
+                itineraries_message = {
+                    "Full data:"
+                    "itineraries": all_itineraries
+                }
+                send_to_kafka(producer, kafka_topic, [itineraries_message])
+
+                print("Messages sent successfully")
 
             except Exception as e:
                 print(f"Error processing flight data: {str(e)}")
@@ -98,6 +116,6 @@ def main():
     # Ensure all messages are sent
     producer.flush()
     producer.close()
-
+    
 if __name__ == "__main__":
     main()

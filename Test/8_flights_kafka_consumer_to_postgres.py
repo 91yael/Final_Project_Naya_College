@@ -1,10 +1,11 @@
 import os
 import json
+import signal
+import sys
 import psycopg2
 from psycopg2 import sql
 from dotenv import load_dotenv
 from kafka import KafkaConsumer
-from psycopg2 import sql
 
 # Load environment variables from .env file
 load_dotenv()
@@ -28,14 +29,13 @@ consumer = KafkaConsumer(
 
 # Connect to PostgreSQL
 def connect_postgres(dbname=None):
-    conn = psycopg2.connect(
+    return psycopg2.connect(
         dbname=dbname,
         host=postgres_host,
         port=postgres_port,
         user=postgres_user,
         password=postgres_password
     )
-    return conn
 
 def create_database_if_not_exists():
     conn = connect_postgres()
@@ -45,23 +45,36 @@ def create_database_if_not_exists():
         cursor.execute(sql.SQL("CREATE DATABASE {}").format(
             sql.Identifier(postgres_db)
         ))
-        print(f"Database {postgres_db} created.")
     except psycopg2.errors.DuplicateDatabase:
-        print(f"Database {postgres_db} already exists.")
+        pass
     conn.close()
 
 def create_table_if_not_exists():
     conn = connect_postgres(dbname=postgres_db)
     cursor = conn.cursor()
     create_table_query = """
-    CREATE TABLE IF NOT EXISTS flights (
+    CREATE TABLE IF NOT EXISTS flights_data (
         id SERIAL PRIMARY KEY,
+        from_country VARCHAR,
+        to_country VARCHAR,
         from_city VARCHAR,
         to_city VARCHAR,
         depart_date DATE,
         return_date DATE,
-        price_raw FLOAT,
-        itinerary JSONB
+        price_dollar FLOAT,
+        outbound_leg_id VARCHAR,
+        outbound_leg_departure_time TIMESTAMP,
+        outbound_leg_arrival_time TIMESTAMP,
+        outbound_leg_origin_airport VARCHAR,
+        outbound_leg_destination_airport VARCHAR,
+        outbound_leg_flight_number VARCHAR,
+        return_leg_id VARCHAR,
+        return_leg_departure_time TIMESTAMP,
+        return_leg_arrival_time TIMESTAMP,
+        return_leg_origin_airport VARCHAR,
+        return_leg_destination_airport VARCHAR,
+        return_leg_flight_number VARCHAR,
+        roundtrip_id VARCHAR
     )
     """
     cursor.execute(create_table_query)
@@ -74,25 +87,47 @@ def insert_record(record):
         cursor = conn.cursor()
 
         insert_query = """
-        INSERT INTO flights (from_city, to_city, depart_date, return_date, price_raw, itinerary)
-        VALUES (%s, %s, %s, %s, %s, %s)
+        INSERT INTO flights_data (from_country, to_country, from_city, to_city, depart_date, return_date, price_dollar, outbound_leg_id, outbound_leg_departure_time, outbound_leg_arrival_time, outbound_leg_origin_airport, outbound_leg_destination_airport, outbound_leg_flight_number, return_leg_id, return_leg_departure_time, return_leg_arrival_time, return_leg_origin_airport, return_leg_destination_airport, return_leg_flight_number, roundtrip_id)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         
         cursor.execute(insert_query, (
+            record['from_country'],
+            record['to_country'],
             record.get('from_city'),
             record.get('to_city'),
             record.get('depart_date'),
             record.get('return_date'),
-            record.get('price_raw'),
-            json.dumps(record.get('itinerary'))  # Convert dict to JSON string
+            record.get('price_dollar'),
+            record.get('outbound_leg', {}).get('id'),
+            record.get('outbound_leg', {}).get('departure_time'),
+            record.get('outbound_leg', {}).get('arrival_time'),
+            record.get('outbound_leg', {}).get('origin_airport'),
+            record.get('outbound_leg', {}).get('destination_airport'),
+            record.get('outbound_leg', {}).get('flight_number'),
+            record.get('return_leg', {}).get('id'),
+            record.get('return_leg', {}).get('departure_time'),
+            record.get('return_leg', {}).get('arrival_time'),
+            record.get('return_leg', {}).get('origin_airport'),
+            record.get('return_leg', {}).get('destination_airport'),
+            record.get('return_leg', {}).get('flight_number'),
+            record.get('roundtrip_id')
         ))
+        
         conn.commit()
         conn.close()
-        print(f"Inserted record into PostgreSQL: {record}")
+        print(f"Record inserted")
     except Exception as e:
-        print(f"Error inserting record into PostgreSQL: {e}")
+        print(f"Error inserting record: {e}")
+
+def signal_handler(sig, frame):
+    consumer.close()
+    sys.exit(0)
 
 def main():
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
     create_database_if_not_exists()
     create_table_if_not_exists()
 

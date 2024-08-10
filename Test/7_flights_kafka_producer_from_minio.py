@@ -17,7 +17,7 @@ minio_access_key = os.getenv('MINIO_ACCESS_KEY')
 minio_secret_key = os.getenv('MINIO_SECRET_KEY')
 minio_bucket_name = os.getenv('MINIO_BUCKET_NAME')
 minio_folder_name = os.getenv('MINIO_FOLDER_PATH_FLIGHTS')  
-
+processed_file = 'processed_records.txt'  # File to track processed records
 
 # Initialize MinIO client
 minio_client = Minio(
@@ -37,8 +37,21 @@ producer = KafkaProducer(
     linger_ms=5000
 )
 
+def load_processed_records():
+    if os.path.exists(processed_file):
+        with open(processed_file, 'r') as f:
+            return set(line.strip() for line in f)
+    return set()
+
+def save_processed_record(record_id):
+    with open(processed_file, 'a') as f:
+        f.write(record_id + '\n')
+
 def upload_data_from_minio_to_kafka():
     try:
+        # Load already processed records
+        processed_records = load_processed_records()
+        
         # List all objects in the MinIO bucket under the specified folder
         objects = minio_client.list_objects(minio_bucket_name, prefix=minio_folder_name, recursive=True)
         
@@ -50,9 +63,18 @@ def upload_data_from_minio_to_kafka():
             # Convert data to JSON
             record = json.loads(data.decode('utf-8'))
             
-            # Send data to Kafka topic
-            producer.send(kafka_topic, json.dumps(record).encode('utf-8'))
-            print(f"Sent data from {obj.object_name} to Kafka topic '{kafka_topic}'")
+            # Check if the record contains the "Full data:itineraries" key
+            if "Full data:itineraries" not in record:
+                record_id = obj.object_name  # or another unique identifier from the record
+                
+                if record_id not in processed_records:
+                    # Send data to Kafka topic
+                    producer.send(kafka_topic, json.dumps(record).encode('utf-8'))
+                    print(f"Sent data from {obj.object_name}")
+                    
+                    # Mark this record as processed
+                    save_processed_record(record_id)
+                    processed_records.add(record_id)
     
     except S3Error as e:
         print(f"Error interacting with MinIO: {e}")

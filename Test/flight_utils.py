@@ -5,11 +5,24 @@ import json
 
 class FlightUtils:
     def __init__(self):
-        # Define variables
+        """Initialize Variables"""
         self.url_location = "https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete"
         self.url_flights = "https://skyscanner80.p.rapidapi.com/api/v1/flights/search-roundtrip"
         self.rapidapi_host = os.getenv('RAPIDAPI_HOST', "skyscanner80.p.rapidapi.com")
+
+        #The number of weekends to retrieve
         self.num_weekends_to_check = 1
+
+        #The number of working days to retrieve
+        self.num_working_days = 5
+
+        #The number of top cheapest flights to retrieve
+        self.num_cheapest_flights = 1
+
+        #The path of destinations file.
+        self.destinations_path = 'destinations.json'
+
+        """"""
 
     # Get location ID
     def get_location_id(self, query, headers):
@@ -41,34 +54,96 @@ class FlightUtils:
             raise ValueError(f"Error: {response.status_code}, {response.text}")
         return response.json()
     
-    # Clean flight data to remove empty entries and filter by stop count
+    # Clean flight data to include only direct flights
     def clean_flight_data(self, flight_data):
         cleaned_data = []
+        itineraries = {}
         for flight in flight_data.get("data", {}).get("itineraries", []):
             if isinstance(flight, dict):
                 stop_count = flight.get("stopCount", 0)
                 if stop_count == 0:
+                    flight_id = flight.get("id")
                     cleaned_data.append({k: (v if v != {} else None) for k, v in flight.items()})
-        return cleaned_data
+                    itineraries[flight_id] = flight
+        return cleaned_data, itineraries
+    
+    # Extract necessary fields
+    def extract_flight_details(self, flight_data):
+        detailed_flights = []
+        for flight in flight_data:
+            # Extracting details for the outbound leg
+            outbound_leg = flight.get("legs", [])[0] if len(flight.get("legs", [])) > 0 else {}
+            outbound_leg_id = outbound_leg.get("id")
+            outbound_departure = outbound_leg.get("departure")
+            outbound_arrival = outbound_leg.get("arrival")
+            outbound_origin = outbound_leg.get("origin", {})
+            outbound_destination = outbound_leg.get("destination", {})
+            outbound_flight_number = None
+            outbound_airline = None
+
+            for segment in outbound_leg.get("segments", []):
+                if segment.get("origin", {}).get("country") == outbound_origin.get("country"):
+                    outbound_flight_number = segment.get("flightNumber", "")
+            
+            for carrier in outbound_leg.get("carriers", {}).get("marketing", []):
+                if carrier.get("name"):
+                    outbound_airline = carrier.get("name")
+
+            # Extracting details for the return leg
+            return_leg = flight.get("legs", [])[1] if len(flight.get("legs", [])) > 1 else {}
+            return_leg_id = return_leg.get("id")
+            return_departure = return_leg.get("departure")
+            return_arrival = return_leg.get("arrival")
+            return_origin = return_leg.get("origin", {})
+            return_destination = return_leg.get("destination", {})
+            return_flight_number = None
+            return_airline = None
+
+            for segment in return_leg.get("segments", []):
+                if segment.get("origin", {}).get("country") == return_origin.get("country"):
+                    return_flight_number = segment.get("flightNumber", "")
+
+            for carrier in return_leg.get("carriers", {}).get("marketing", []):
+                if carrier.get("name"):
+                    return_airline = carrier.get("name")
+
+            detailed_flights.append({
+                "id": flight.get("id"),
+                "price_dollar": flight.get("price", {}).get("raw", float('inf')),
+                "outbound_leg": {
+                    "id": outbound_leg_id,
+                    "departure_time": outbound_departure,
+                    "arrival_time": outbound_arrival,
+                    "origin_airport": outbound_origin.get("name"),
+                    "destination_airport": outbound_destination.get("name"),
+                    "flight_number": outbound_flight_number,
+                    "airline": outbound_airline
+                },
+                "return_leg": {
+                    "id": return_leg_id,
+                    "departure_time": return_departure,
+                    "arrival_time": return_arrival,
+                    "origin_airport": return_origin.get("name"),
+                    "destination_airport": return_destination.get("name"),
+                    "flight_number": return_flight_number,
+                    "airline": return_airline 
+                }
+            })
+        return detailed_flights
+
+
     
     # Extract top cheapest flights
     def get_top_cheapest_flights(self, flights_data, top_cheapest_flights):
-        flights = []
-        itineraries = flights_data.get("data", {}).get("itineraries", [])
-    
-        for itinerary in itineraries:
-            price_raw = itinerary.get("price", {}).get("raw", float('inf'))
-            stop_count = itinerary.get("stopCount", 0) 
-            if stop_count == 0:  
-                flights.append({
-                    "id": itinerary.get("id"),
-                    "price_raw": price_raw,
-                    "itinerary": itinerary
-                })
-    
-        # Sort flights by price
-        flights_sorted = sorted(flights, key=lambda x: x["price_raw"])
+        flights_sorted = sorted(flights_data, key=lambda x: x["price_dollar"])
         return flights_sorted[:top_cheapest_flights]
+    
+    # Get the cheapeast direct flights with necessary fields
+    def process_flight_data(self, flight_data):
+        cleaned_data = self.clean_flight_data(flight_data)
+        detailed_flights = self.extract_flight_details(cleaned_data)
+        cheapest_flights = self.get_top_cheapest_flights(detailed_flights, self.num_cheapest_flights)
+        return cheapest_flights
 
     # Get next weekends
     def get_next_weekends(self, num_weekends=None):
