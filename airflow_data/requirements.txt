@@ -1,0 +1,16 @@
+#python -m venv myenv
+#source myenv/Scripts/activate
+# pip install -r ./requirements.txt
+requests
+pandas
+sqlalchemy
+datetime
+python-dotenv
+pyarrow
+fastparquet
+minio
+psycopg2-binary
+apache-airflow
+kafka-python
+
+
