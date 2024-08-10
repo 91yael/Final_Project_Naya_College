@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from kafka import KafkaProducer
-from flight_utils import FlightUtils
+from Test.flight_utils import FlightUtils
 
 """Initialize parameters"""
 
