@@ -14,5 +14,3 @@ apache-airflow==2.8.2
 kafka-python==2.0.1
 confluent_kafka==2.4.0
 numpy==1.25.0
-
-
