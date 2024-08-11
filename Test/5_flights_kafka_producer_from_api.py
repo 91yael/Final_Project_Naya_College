@@ -42,6 +42,10 @@ def main():
     destinations = flight_utils.load_destinations(flight_utils.destinations_path)
     # Get next weekends
     weekends = flight_utils.get_next_weekends(flight_utils.num_weekends_to_check)
+    # Ge next workdays
+    workdays = flight_utils.get_next_workdays(flight_utils.num_weeks_to_check)
+    # Weekends and workdays
+    all_dates = weekends + workdays
 
     for destination in destinations:
         from_city = destination.get("from")
@@ -50,7 +54,7 @@ def main():
             print("Missing 'from' or 'to' key in destination.")
             continue
         
-        for depart_date, return_date in weekends:
+        for depart_date, return_date in all_dates:
             try:
                 print(f"Fetching location ID for {from_city} and {to_city}...")
                 from_id = flight_utils.get_location_id(from_city, headers)

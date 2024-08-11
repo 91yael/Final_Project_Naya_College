@@ -13,8 +13,8 @@ class FlightUtils:
         #The number of weekends to retrieve
         self.num_weekends_to_check = 1
 
-        #The number of working days to retrieve
-        self.num_working_days = 5
+        #The number of weeks to retrieve
+        self.num_weeks_to_check = 1
 
         #The number of top cheapest flights to retrieve
         self.num_cheapest_flights = 1
@@ -138,12 +138,6 @@ class FlightUtils:
         flights_sorted = sorted(flights_data, key=lambda x: x["price_dollar"])
         return flights_sorted[:top_cheapest_flights]
     
-    # Get the cheapeast direct flights with necessary fields
-    def process_flight_data(self, flight_data):
-        cleaned_data = self.clean_flight_data(flight_data)
-        detailed_flights = self.extract_flight_details(cleaned_data)
-        cheapest_flights = self.get_top_cheapest_flights(detailed_flights, self.num_cheapest_flights)
-        return cheapest_flights
 
     # Get next weekends
     def get_next_weekends(self, num_weekends=None):
@@ -165,9 +159,8 @@ class FlightUtils:
         workdays = []
         for i in range(num_weeks):
             start_of_week = today + timedelta((6 - today.weekday() + 7) % 7 + i * 7)  # Next Sunday
-            for j in range(5):  # Sunday through Thursday
-                workday = start_of_week + timedelta(days=j)
-                workdays.append(workday.strftime("%Y-%m-%d"))
+            end_of_week = start_of_week + timedelta(4)  # Next Thursday
+            workdays.append((start_of_week.strftime("%Y-%m-%d"), end_of_week.strftime("%Y-%m-%d")))
         return workdays
     
     # Load destinations
