@@ -3,5 +3,45 @@
         "from": "Tel Aviv",
         "to": "London",
         "country": "United Kingdom"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Rome",
+        "country": "Italy"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Paris",
+        "country": "France"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "New York",
+        "country": "United States"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Athens",
+        "country": "Greece"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Barcelona",
+        "country": "Spain"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Madrid",
+        "country": "Spain"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Praha",
+        "country": "Czech Republic"
+    },
+    {
+        "from": "Tel Aviv",
+        "to": "Budapest",
+        "country": "Hungary"
     }
 ]

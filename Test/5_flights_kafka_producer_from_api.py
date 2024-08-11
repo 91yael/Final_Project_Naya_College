@@ -75,8 +75,6 @@ def main():
                 for flight in top_cheapest_flights:
                     flight_messages.append({
                         "roundtrip_id": flight["id"],
-                        "from_country": flight["outbound_leg"]["origin_airport"],
-                        "to_country": flight["outbound_leg"]["destination_airport"],
                         "from_city": from_city,
                         "to_city": to_city,
                         "depart_date": depart_date,

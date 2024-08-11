@@ -55,8 +55,6 @@ def create_table_if_not_exists():
     create_table_query = """
     CREATE TABLE IF NOT EXISTS flights_data (
         id SERIAL PRIMARY KEY,
-        from_country VARCHAR,
-        to_country VARCHAR,
         from_city VARCHAR,
         to_city VARCHAR,
         depart_date DATE,
@@ -91,8 +89,6 @@ def insert_record(record):
 
         insert_query = """
                         INSERT INTO flights_data (
-                        from_country, 
-                        to_country, 
                         from_city, 
                         to_city, 
                         depart_date, 
@@ -115,12 +111,10 @@ def insert_record(record):
                         roundtrip_id
                     )
                     VALUES (
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                     )
                     ON CONFLICT (outbound_leg_id, return_leg_id, depart_date)
                     DO UPDATE SET
-                        from_country = EXCLUDED.from_country,
-                        to_country = EXCLUDED.to_country,
                         from_city = EXCLUDED.from_city,
                         to_city = EXCLUDED.to_city,
                         return_date = EXCLUDED.return_date,
@@ -141,8 +135,6 @@ def insert_record(record):
                             """
 
         cursor.execute(insert_query, (
-            record['from_country'],
-            record['to_country'],
             record.get('from_city'),
             record.get('to_city'),
             record.get('depart_date'),

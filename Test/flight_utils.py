@@ -11,13 +11,13 @@ class FlightUtils:
         self.rapidapi_host = os.getenv('RAPIDAPI_HOST', "skyscanner80.p.rapidapi.com")
 
         #The number of weekends to retrieve
-        self.num_weekends_to_check = 1
+        self.num_weekends_to_check = 2
 
         #The number of weeks to retrieve
-        self.num_weeks_to_check = 1
+        self.num_weeks_to_check = 2
 
         #The number of top cheapest flights to retrieve
-        self.num_cheapest_flights = 1
+        self.num_cheapest_flights = 10
 
         #The path of destinations file.
         self.destinations_path = 'destinations.json'
