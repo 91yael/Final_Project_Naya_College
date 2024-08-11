@@ -68,13 +68,16 @@ def create_table_if_not_exists():
         outbound_leg_origin_airport VARCHAR,
         outbound_leg_destination_airport VARCHAR,
         outbound_leg_flight_number VARCHAR,
+        outbound_leg_airline VARCHAR,
         return_leg_id VARCHAR,
         return_leg_departure_time TIMESTAMP,
         return_leg_arrival_time TIMESTAMP,
         return_leg_origin_airport VARCHAR,
         return_leg_destination_airport VARCHAR,
         return_leg_flight_number VARCHAR,
-        roundtrip_id VARCHAR
+        return_leg_airline VARCHAR, 
+        roundtrip_id VARCHAR,
+        CONSTRAINT unique_flight UNIQUE (outbound_leg_id, return_leg_id, depart_date)
     )
     """
     cursor.execute(create_table_query)
@@ -101,16 +104,18 @@ def insert_record(record):
                         outbound_leg_origin_airport, 
                         outbound_leg_destination_airport, 
                         outbound_leg_flight_number, 
+                        outbound_leg_airline, 
                         return_leg_id, 
                         return_leg_departure_time, 
                         return_leg_arrival_time, 
                         return_leg_origin_airport, 
                         return_leg_destination_airport, 
                         return_leg_flight_number, 
+                        return_leg_airline, 
                         roundtrip_id
                     )
                     VALUES (
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                     )
                     ON CONFLICT (outbound_leg_id, return_leg_id, depart_date)
                     DO UPDATE SET
@@ -125,11 +130,13 @@ def insert_record(record):
                         outbound_leg_origin_airport = EXCLUDED.outbound_leg_origin_airport,
                         outbound_leg_destination_airport = EXCLUDED.outbound_leg_destination_airport,
                         outbound_leg_flight_number = EXCLUDED.outbound_leg_flight_number,
+                        outbound_leg_airline = EXCLUDED.outbound_leg_airline,
                         return_leg_departure_time = EXCLUDED.return_leg_departure_time,
                         return_leg_arrival_time = EXCLUDED.return_leg_arrival_time,
                         return_leg_origin_airport = EXCLUDED.return_leg_origin_airport,
                         return_leg_destination_airport = EXCLUDED.return_leg_destination_airport,
                         return_leg_flight_number = EXCLUDED.return_leg_flight_number,
+                        return_leg_airline = EXCLUDED.return_leg_airline,
                         roundtrip_id = EXCLUDED.roundtrip_id;
                             """
 
@@ -147,12 +154,14 @@ def insert_record(record):
             record.get('outbound_leg', {}).get('origin_airport'),
             record.get('outbound_leg', {}).get('destination_airport'),
             record.get('outbound_leg', {}).get('flight_number'),
+            record.get('outbound_leg', {}).get('airline'),
             record.get('return_leg', {}).get('id'),
             record.get('return_leg', {}).get('departure_time'),
             record.get('return_leg', {}).get('arrival_time'),
             record.get('return_leg', {}).get('origin_airport'),
             record.get('return_leg', {}).get('destination_airport'),
             record.get('return_leg', {}).get('flight_number'),
+            record.get('return_leg', {}).get('airline'),
             record.get('roundtrip_id')
         ))
         
