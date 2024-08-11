@@ -87,10 +87,52 @@ def insert_record(record):
         cursor = conn.cursor()
 
         insert_query = """
-        INSERT INTO flights_data (from_country, to_country, from_city, to_city, depart_date, return_date, price_dollar, outbound_leg_id, outbound_leg_departure_time, outbound_leg_arrival_time, outbound_leg_origin_airport, outbound_leg_destination_airport, outbound_leg_flight_number, return_leg_id, return_leg_departure_time, return_leg_arrival_time, return_leg_origin_airport, return_leg_destination_airport, return_leg_flight_number, roundtrip_id)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        
+                        INSERT INTO flights_data (
+                        from_country, 
+                        to_country, 
+                        from_city, 
+                        to_city, 
+                        depart_date, 
+                        return_date, 
+                        price_dollar, 
+                        outbound_leg_id, 
+                        outbound_leg_departure_time, 
+                        outbound_leg_arrival_time, 
+                        outbound_leg_origin_airport, 
+                        outbound_leg_destination_airport, 
+                        outbound_leg_flight_number, 
+                        return_leg_id, 
+                        return_leg_departure_time, 
+                        return_leg_arrival_time, 
+                        return_leg_origin_airport, 
+                        return_leg_destination_airport, 
+                        return_leg_flight_number, 
+                        roundtrip_id
+                    )
+                    VALUES (
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    )
+                    ON CONFLICT (outbound_leg_id, return_leg_id, depart_date)
+                    DO UPDATE SET
+                        from_country = EXCLUDED.from_country,
+                        to_country = EXCLUDED.to_country,
+                        from_city = EXCLUDED.from_city,
+                        to_city = EXCLUDED.to_city,
+                        return_date = EXCLUDED.return_date,
+                        price_dollar = EXCLUDED.price_dollar,
+                        outbound_leg_departure_time = EXCLUDED.outbound_leg_departure_time,
+                        outbound_leg_arrival_time = EXCLUDED.outbound_leg_arrival_time,
+                        outbound_leg_origin_airport = EXCLUDED.outbound_leg_origin_airport,
+                        outbound_leg_destination_airport = EXCLUDED.outbound_leg_destination_airport,
+                        outbound_leg_flight_number = EXCLUDED.outbound_leg_flight_number,
+                        return_leg_departure_time = EXCLUDED.return_leg_departure_time,
+                        return_leg_arrival_time = EXCLUDED.return_leg_arrival_time,
+                        return_leg_origin_airport = EXCLUDED.return_leg_origin_airport,
+                        return_leg_destination_airport = EXCLUDED.return_leg_destination_airport,
+                        return_leg_flight_number = EXCLUDED.return_leg_flight_number,
+                        roundtrip_id = EXCLUDED.roundtrip_id;
+                            """
+
         cursor.execute(insert_query, (
             record['from_country'],
             record['to_country'],
